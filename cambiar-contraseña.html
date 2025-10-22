@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña - Sistema DM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        .info-box {
+            background: #dbeafe;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .info-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .info-text {
+            color: #1e40af;
+            line-height: 1.5;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+        
+        .password-input {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.25rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            background: #f1f5f9;
+            transform: scale(1.1);
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .success-message {
+            background: #d1fae5;
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #a7f3d0;
+            display: none;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .link {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .link:hover {
+            text-decoration: underline;
+        }
+        
+        .loading {
+            display: none;
+        }
+        
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔑 Cambiar Contraseña</h1>
+            <p>Departamento de Diseño y Multimedia</p>
+        </div>
+        
+        <div class="info-box">
+            <div class="info-icon">🔐</div>
+            <div class="info-text">
+                Ingresa tu nueva contraseña. Asegúrate de que sea segura y fácil de recordar.
+            </div>
+        </div>
+        
+        <form id="passwordForm">
+            <div class="form-group">
+                <label class="form-label" for="password">Nueva Contraseña</label>
+                <div class="password-input">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input" 
+                        placeholder="Mínimo 8 caracteres"
+                        required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                        👁
+                    </button>
+                </div>
+                <div class="error-message" id="passwordError">
+                    La contraseña debe tener al menos 8 caracteres
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="confirmPassword">Confirmar Nueva Contraseña</label>
+                <div class="password-input">
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        class="form-input" 
+                        placeholder="Repite tu nueva contraseña"
+                        required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                        👁
+                    </button>
+                </div>
+                <div class="error-message" id="confirmPasswordError">
+                    Las contraseñas no coinciden
+                </div>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                ✅ ¡Contraseña cambiada exitosamente! Redirigiendo al login...
+            </div>
+            
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+                <span id="btnText">Cambiar Contraseña</span>
+                <span class="loading" id="loading">
+                    <span class="spinner"></span>
+                    Procesando...
+                </span>
+            </button>
+        </form>
+        
+        <div class="footer">
+            <a href="#" class="link" onclick="goToLogin()">← Volver al inicio de sesión</a>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const button = field.nextElementSibling;
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                button.textContent = '🙈';
+            } else {
+                field.type = 'password';
+                button.textContent = '👁';
+            }
+        }
+        
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            
+            let isValid = true;
+            
+            // Validar longitud de contraseña
+            if (password.length < 8) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+            
+            // Validar que las contraseñas coincidan
+            if (password !== confirmPassword) {
+                confirmPasswordError.style.display = 'block';
+                isValid = false;
+            } else {
+                confirmPasswordError.style.display = 'none';
+            }
+            
+            return isValid;
+        }
+        
+        function showSuccess() {
+            const successMessage = document.getElementById('successMessage');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const loading = document.getElementById('loading');
+            
+            successMessage.style.display = 'block';
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            loading.style.display = 'inline';
+            
+            // Simular redirección después de 2 segundos
+            setTimeout(() => {
+                alert('¡Contraseña cambiada exitosamente! En la aplicación real, esto te redirigiría al login.');
+            }, 2000);
+        }
+        
+        function goToLogin() {
+            alert('En la aplicación real, esto te llevaría al login.');
+        }
+        
+        // Event listeners
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validatePassword()) {
+                showSuccess();
+            }
+        });
+        
+        // Validación en tiempo real
+        document.getElementById('password').addEventListener('input', validatePassword);
+        document.getElementById('confirmPassword').addEventListener('input', validatePassword);
+    </script>
+</body>
+</html>
+

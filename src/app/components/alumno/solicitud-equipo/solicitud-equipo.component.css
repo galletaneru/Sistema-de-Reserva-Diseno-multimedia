@@ -1,0 +1,367 @@
+/* Estilos específicos para el componente de solicitud de equipos */
+.solicitud-card {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.solicitud-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.solicitud-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.solicitud-form {
+  width: 100%;
+}
+
+.form-section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Estilos para la tabla de equipos */
+.equipos-container {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.equipos-table {
+  margin: 0;
+  min-width: 800px;
+}
+
+.equipos-table th {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.875rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.equipo-row {
+  transition: all 0.3s ease;
+}
+
+.equipo-row:hover {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.equipo-row.reservado {
+  opacity: 0.7;
+  background: var(--bg-secondary);
+}
+
+.equipo-row.reservado:hover {
+  background: var(--bg-secondary);
+  transform: none;
+  box-shadow: none;
+}
+
+.equipo-row td {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* Estilos para las celdas específicas */
+.codigo-cell {
+  width: 160px;
+  min-width: 160px;
+}
+
+.codigo-badge {
+  background: linear-gradient(135deg, var(--secondary) 0%, #f97316 100%);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-sm);
+  min-width: 80px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.equipo-cell {
+  text-align: left !important;
+  min-width: 200px;
+}
+
+.equipo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.equipo-nombre {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.categoria-cell {
+  width: 140px;
+}
+
+.categoria-badge {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-sm);
+}
+
+.categoria-audiovisual {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  color: white;
+}
+
+.categoria-accesorios {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: white;
+}
+
+.categoria-audio {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.categoria-computación {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+.estado-cell {
+  width: 120px;
+}
+
+.estado-badge {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-sm);
+}
+
+.estado-disponible {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.estado-reservado {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.cantidad-cell {
+  width: 120px;
+}
+
+.cantidad-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qty {
+  width: 80px;
+  padding: 0.75rem;
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--bg-card);
+}
+
+.qty:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  transform: scale(1.05);
+}
+
+.qty:hover {
+  border-color: var(--primary-light);
+}
+
+.qty.disabled,
+.qty:disabled {
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  border-color: var(--border-medium);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.qty.disabled:hover,
+.qty:disabled:hover {
+  border-color: var(--border-medium);
+  transform: none;
+}
+
+/* Resumen de la solicitud */
+.resumen-container {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+}
+
+.resumen-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.resumen-item:last-child {
+  margin-bottom: 0;
+}
+
+.resumen-item:hover {
+  transform: translateX(5px);
+  box-shadow: var(--shadow-md);
+}
+
+.resumen-equipo {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.resumen-cantidad {
+  background: var(--primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Botones secundarios */
+.btn-secondary {
+  background: linear-gradient(135deg, var(--text-secondary) 0%, var(--text-muted) 100%);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Animaciones específicas */
+.solicitud-card {
+  animation: slideInUp 0.8s ease-out;
+}
+
+.form-section {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.form-section:nth-child(2) { animation-delay: 0.1s; }
+.form-section:nth-child(3) { animation-delay: 0.2s; }
+.form-section:nth-child(4) { animation-delay: 0.3s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .solicitud-card {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .form-section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .equipos-table {
+    min-width: 600px;
+  }
+  
+  .equipos-table th,
+  .equipo-row td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .codigo-badge,
+  .categoria-badge,
+  .estado-badge {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .qty {
+    width: 60px;
+    padding: 0.5rem;
+  }
+  
+  .footer-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .h1 {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+  }
+  
+  .equipos-table th {
+    font-size: 0.75rem;
+    padding: 0.75rem 0.25rem;
+  }
+}

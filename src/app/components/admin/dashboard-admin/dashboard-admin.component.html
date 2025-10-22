@@ -1,0 +1,227 @@
+<!-- Navbar Admin -->
+<nav class="admin-navbar">
+  <div class="navbar-content">
+    <div class="navbar-brand">
+      <h1 class="navbar-title">Diseño Multimedia</h1>
+    </div>
+    <div class="navbar-actions">
+      <button class="btn btn-primary navbar-btn" (click)="mostrarGestionar()">
+        Gestionar
+      </button>
+      <button class="btn btn-secondary navbar-btn" (click)="mostrarSolicitudes()">
+        Ver Solicitudes
+      </button>
+      <button class="btn btn-danger navbar-btn" (click)="cerrarSesion()">
+        Cerrar Sesión
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="card admin-dashboard">
+    <!-- Sección Gestionar (por defecto) -->
+    <div class="admin-section" *ngIf="seccionActiva === 'gestionar'">
+      <div class="admin-header">
+        <h1 class="admin-title">Panel de Administración</h1>
+        <p class="admin-subtitle">Gestiona equipos, packs y sanciones del sistema</p>
+      </div>
+
+      <div class="admin-stats">
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3>15</h3>
+            <p>Equipos Totales</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3>8</h3>
+            <p>Packs Activos</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3>3</h3>
+            <p>Sanciones Activas</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-actions">
+        <h2 class="section-title">Acciones Rápidas</h2>
+        <div class="action-grid">
+          <a routerLink="/admin/equipos" class="action-card equipos">
+            <div class="action-icon"></div>
+            <h3>Gestionar Equipos</h3>
+            <p>Crear, editar y eliminar equipos del sistema</p>
+          </a>
+          
+          <a routerLink="/admin/packs" class="action-card packs">
+            <div class="action-icon"></div>
+            <h3>Gestionar Packs</h3>
+            <p>Crear y administrar paquetes de equipos</p>
+          </a>
+          
+          <a routerLink="/admin/sanciones" class="action-card sanciones">
+            <div class="action-icon"></div>
+            <h3>Gestionar Sanciones</h3>
+            <p>Emitir y administrar sanciones a usuarios</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección Ver Solicitudes -->
+    <div class="admin-section" *ngIf="seccionActiva === 'solicitudes'">
+      <div class="admin-header">
+        <h1 class="admin-title">Solicitudes de Equipos</h1>
+      </div>
+
+      <div class="notificaciones-section">
+        <div class="notificaciones-header">
+          <h2 class="section-title">Notificaciones Recientes</h2>
+        </div>
+        
+        <div class="notificaciones-preview">
+          <div class="notificacion-item pendiente" (click)="abrirDetalleSolicitud(solicitudes[0])">
+            <div class="notificacion-content">
+              <h4 class="notificacion-titulo">Nueva Solicitud de Equipos</h4>
+              <p class="notificacion-descripcion">María González solicitó 2 equipos para el 15-20 de enero</p>
+              <span class="notificacion-tiempo">Hace 2 horas</span>
+            </div>
+            <div class="notificacion-acciones">
+              <button class="btn btn-sm btn-success" (click)="aprobarSolicitud(solicitudes[0], $event)">Aprobar</button>
+              <button class="btn btn-sm btn-danger" (click)="rechazarSolicitud(solicitudes[0], $event)">Rechazar</button>
+            </div>
+          </div>
+          
+          <div class="notificacion-item pendiente" (click)="abrirDetalleSolicitud(solicitudes[1])">
+            <div class="notificacion-content">
+              <h4 class="notificacion-titulo">Nueva Solicitud de Equipos</h4>
+              <p class="notificacion-descripcion">Carlos Rodríguez solicitó 2 equipos para el 18-25 de enero</p>
+              <span class="notificacion-tiempo">Hace 4 horas</span>
+            </div>
+            <div class="notificacion-acciones">
+              <button class="btn btn-sm btn-success" (click)="aprobarSolicitud(solicitudes[1], $event)">Aprobar</button>
+              <button class="btn btn-sm btn-danger" (click)="rechazarSolicitud(solicitudes[1], $event)">Rechazar</button>
+            </div>
+          </div>
+          
+          <div class="notificacion-item procesada" (click)="abrirDetalleSolicitud(solicitudes[2])">
+            <div class="notificacion-content">
+              <h4 class="notificacion-titulo">Solicitud Aprobada</h4>
+              <p class="notificacion-descripcion">Ana Martínez - Tablet iPad Pro aprobada</p>
+              <span class="notificacion-tiempo">Ayer</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="notificaciones-footer">
+          <a routerLink="/admin/notificaciones" class="btn btn-primary ver-todas-btn">
+            Ver Todas las Solicitudes
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-footer">
+      <p class="footer-text">Sistema de Gestión de Equipos - Departamento de Diseño  Multimedia</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Detalle de Solicitud -->
+<div class="modal-overlay" *ngIf="mostrarModalDetalle" (click)="cerrarModalDetalle()">
+  <div class="modal-content detalle-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Detalle de Solicitud</h3>
+      <button class="modal-close" (click)="cerrarModalDetalle()">×</button>
+    </div>
+    
+    <div class="modal-body" *ngIf="solicitudDetalle">
+      <div class="solicitud-detalle-info">
+        <div class="info-row">
+          <span class="info-label">Estudiante:</span>
+          <span class="info-value">{{solicitudDetalle.estudiante}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{solicitudDetalle.email}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Fecha de Solicitud:</span>
+          <span class="info-value">{{formatearFecha(solicitudDetalle.fechaSolicitud)}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Período de Reserva:</span>
+          <span class="info-value">{{formatearFecha(solicitudDetalle.fechaInicio)}} - {{formatearFecha(solicitudDetalle.fechaFin)}}</span>
+        </div>
+      </div>
+
+      <div class="equipos-detalle">
+        <h4 class="equipos-titulo">Equipos Solicitados:</h4>
+        <ul class="equipos-lista">
+          <li *ngFor="let equipo of solicitudDetalle.equipos" class="equipo-item-detalle">
+            {{equipo}}
+          </li>
+        </ul>
+      </div>
+
+      <div class="motivo-rechazo-detalle" *ngIf="solicitudDetalle.motivoRechazo">
+        <h4 class="motivo-titulo">Motivo de Rechazo:</h4>
+        <p class="motivo-texto">{{solicitudDetalle.motivoRechazo}}</p>
+      </div>
+    </div>
+    
+    <div class="modal-footer" *ngIf="solicitudDetalle && solicitudDetalle.estado === 'PENDIENTE'">
+      <button class="btn btn-secondary" (click)="cerrarModalDetalle()">
+        Cancelar
+      </button>
+      <button class="btn btn-success" (click)="aprobarSolicitud(solicitudDetalle)">
+        Aprobar
+      </button>
+      <button class="btn btn-danger" (click)="rechazarSolicitud(solicitudDetalle)">
+        Rechazar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Rechazo -->
+<div class="modal-overlay" *ngIf="mostrarModalRechazo" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Rechazar Solicitud</h3>
+      <button class="modal-close" (click)="cerrarModal()">×</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="solicitud-info" *ngIf="solicitudSeleccionada">
+        <p><strong>Estudiante:</strong> {{solicitudSeleccionada.estudiante}}</p>
+        <p><strong>Equipos:</strong> {{solicitudSeleccionada.equipos.join(', ')}}</p>
+        <p><strong>Período:</strong> {{formatearFecha(solicitudSeleccionada.fechaInicio)}} - {{formatearFecha(solicitudSeleccionada.fechaFin)}}</p>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Motivo del Rechazo *</label>
+        <textarea 
+          class="form-textarea" 
+          [(ngModel)]="motivoRechazo" 
+          placeholder="Ingresa el motivo por el cual se rechaza esta solicitud..."
+          rows="4"
+          required>
+        </textarea>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="cerrarModal()">
+        Cancelar
+      </button>
+      <button class="btn btn-danger" (click)="confirmarRechazo()">
+        Confirmar Rechazo
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="card packs-card">
+    <div class="packs-header">
+      <h1 class="packs-title">
+       
+        Gestión de Packs
+      </h1>
+      <p class="packs-subtitle">Crea y administra paquetes de equipos para facilitar las solicitudes</p>
+    </div>
+
+    <div class="packs-actions">
+      <button class="btn btn-primary" (click)="abrirModalNuevo()">
+        
+        Nuevo Pack
+      </button>
+      <button class="btn btn-secondary" (click)="volverDashboard()">
+        
+        Volver al Dashboard
+      </button>
+    </div>
+
+    <div class="packs-grid">
+      <div class="pack-card" *ngFor="let pack of packs">
+        <div class="pack-header">
+          <h3 class="pack-nombre">{{pack.nombre}}</h3>
+          <span class="pack-activo" [class.activo]="pack.activo" [class.inactivo]="!pack.activo">
+            {{pack.activo ? 'ACTIVO' : 'INACTIVO'}}
+          </span>
+        </div>
+        
+        <p class="pack-descripcion">{{pack.descripcion}}</p>
+        
+        <div class="pack-equipos">
+          <h4>Equipos incluidos:</h4>
+          <div class="equipos-list">
+            <span class="equipo-item" *ngFor="let equipo of pack.equipos">
+              {{equipo.codigo}} - {{equipo.nombre}}
+            </span>
+          </div>
+        </div>
+        
+        <div class="pack-actions">
+          <button class="btn btn-sm btn-edit" (click)="editarPack(pack)">
+            <span class="btn-icon">✏️</span>
+            Editar
+          </button>
+          <button class="btn btn-sm btn-delete" (click)="eliminarPack(pack)">
+            <span class="btn-icon">🗑️</span>
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-text">
+      <p>Sistema de Gestión de Equipos - Departamento de Diseño Multimedia</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para crear/editar pack -->
+<div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>{{packSeleccionado ? 'Editar Pack' : 'Nuevo Pack'}}</h3>
+      <button class="modal-close" (click)="cerrarModal()">×</button>
+    </div>
+    
+    <form [formGroup]="packForm" (ngSubmit)="guardarPack()" class="modal-form">
+      <div class="form-group">
+        <label class="form-label">Nombre del Pack</label>
+        <input type="text" class="form-input" formControlName="nombre" 
+               placeholder="Ej: Pack Básico de Video">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Descripción</label>
+        <textarea class="form-input" formControlName="descripcion" rows="3"
+                  placeholder="Describe qué incluye este pack..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Estado</label>
+        <select class="form-input" formControlName="activo">
+          <option [value]="true">Activo</option>
+          <option [value]="false">Inactivo</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Equipos del Pack</label>
+        <div class="equipos-seleccion">
+          <div class="equipo-option" *ngFor="let equipo of equiposDisponibles">
+            <label class="checkbox-label">
+              <input type="checkbox" 
+                     [value]="equipo.id"
+                     (change)="toggleEquipo($event, equipo)">
+              <span class="checkbox-text">
+                {{equipo.codigo}} - {{equipo.nombre}} ({{equipo.categoria}})
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" (click)="cerrarModal()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="!packForm.valid">
+          {{packSeleccionado ? 'Actualizar' : 'Crear'}} Pack
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

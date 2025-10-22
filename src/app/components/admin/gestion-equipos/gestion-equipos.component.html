@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="card equipos-card">
+    <div class="equipos-header">
+      <h1 class="equipos-title">
+        
+        Gestión de Equipos
+      </h1>
+      <p class="equipos-subtitle">Administra el inventario de equipos del departamento</p>
+    </div>
+
+    <div class="equipos-actions">
+      <button class="btn btn-primary" (click)="abrirModalNuevo()">
+        
+        Nuevo Equipo
+      </button>
+      <button class="btn btn-secondary" (click)="volverDashboard()">
+        
+        Volver al Dashboard
+      </button>
+    </div>
+
+    <div class="equipos-table-container">
+      <table class="table equipos-table">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipo of equipos; let i = index">
+            <td class="codigo-cell">
+              <span class="codigo-badge">{{equipo.codigo}}</span>
+            </td>
+            <td class="equipo-cell">
+              <div class="equipo-info">
+                <span class="equipo-nombre">{{equipo.nombre}}</span>
+              </div>
+            </td>
+            <td class="categoria-cell">
+              <span class="categoria-badge">{{equipo.categoria}}</span>
+            </td>
+            <td class="estado-cell">
+              <span class="estado-badge" [class.disponible]="equipo.estado === 'DISPONIBLE'" 
+                    [class.reservado]="equipo.estado === 'RESERVADO'" 
+                    [class.mantenimiento]="equipo.estado === 'MANTENIMIENTO'">
+                {{equipo.estado}}
+              </span>
+            </td>
+            <td class="acciones-cell">
+              <button class="btn btn-sm btn-edit" (click)="editarEquipo(equipo)">
+                <span class="btn-icon">✏️</span>
+              </button>
+              <button class="btn btn-sm btn-delete" (click)="eliminarEquipo(equipo)">
+                <span class="btn-icon">🗑️</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="footer-text">
+      <p>Sistema de Gestión de Equipos - Departamento de Diseño Multimedia</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para crear/editar equipo -->
+<div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>{{equipoSeleccionado ? 'Editar Equipo' : 'Nuevo Equipo'}}</h3>
+      <button class="modal-close" (click)="cerrarModal()">×</button>
+    </div>
+    
+    <form [formGroup]="equipoForm" (ngSubmit)="guardarEquipo()" class="modal-form">
+      <div class="form-group">
+        <label class="form-label">Código del Equipo</label>
+        <input type="text" class="form-input" formControlName="codigo" 
+               placeholder="Ej: EQ-001">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Nombre del Equipo</label>
+        <input type="text" class="form-input" formControlName="nombre" 
+               placeholder="Ej: Cámara Canon EOS">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Categoría</label>
+        <select class="form-input" formControlName="categoria">
+          <option value="">Seleccionar categoría</option>
+          <option value="CÁMARA">Cámara</option>
+          <option value="AUDIO">Audio</option>
+          <option value="ILUMINACIÓN">Iluminación</option>
+          <option value="TRÍPODE">Trípode</option>
+          <option value="ACCESORIO">Accesorio</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Estado</label>
+        <select class="form-input" formControlName="estado">
+          <option value="DISPONIBLE">Disponible</option>
+          <option value="RESERVADO">Reservado</option>
+          <option value="MANTENIMIENTO">Mantenimiento</option>
+        </select>
+      </div>
+      
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" (click)="cerrarModal()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="!equipoForm.valid">
+          {{equipoSeleccionado ? 'Actualizar' : 'Crear'}} Equipo
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

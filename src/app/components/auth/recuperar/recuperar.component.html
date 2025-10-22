@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="card recuperar-card">
+    <div class="recuperar-header">
+      <h1 class="h1">🔐 Recuperar Contraseña</h1>
+      <p class="recuperar-subtitle">Departamento de Diseño y Multimedia</p>
+    </div>
+    
+    <div class="recuperar-content">
+      <div class="info-box">
+        <div class="info-icon">📧</div>
+        <p class="info-text">
+          Ingresa tu correo electrónico institucional y te enviaremos las instrucciones 
+          para restablecer tu contraseña.
+        </p>
+      </div>
+      
+      <form [formGroup]="form" (ngSubmit)="submit()" class="recuperar-form">
+        <div class="input-group">
+          <label class="input-label">Correo electrónico institucional</label>
+          <input 
+            class="input" 
+            type="email" 
+            formControlName="email" 
+            placeholder="alguien@uta.cl"
+            autocomplete="email">
+        </div>
+        
+        <button 
+          class="btn btn-primary recuperar-btn" 
+          [disabled]="form.invalid"
+          type="submit">
+          <span>Enviar Instrucciones</span>
+        </button>
+      </form>
+      
+      <div class="recuperar-footer">
+        <a class="link" routerLink="/auth/login">
+          ← Volver al inicio de sesión
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
