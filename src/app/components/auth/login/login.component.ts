@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,29 +9,51 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  hide = true;
+  hide: boolean = true; 
   form: FormGroup;
+  errorMessage = '';
+  loading = false;
 
-  constructor(private fb: FormBuilder, private router: Router){
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
-  submit(){
-    if(this.form.valid){
-      const email = this.form.get('email')?.value;
-      const password = this.form.get('password')?.value;
-      
-      // Simulación de autenticación - en producción esto vendría del backend
-      if(email === 'admin@gmail.com' && password === 'admin123'){
-        alert('¡Bienvenido Administrador!');
-        this.router.navigate(['/admin/dashboard']);
-      } else {
-        alert('¡Bienvenido!');
-        this.router.navigate(['/alumno/solicitud-equipo']);
+  submit() {
+    if (this.form.invalid) return;
+
+    const { email, password } = this.form.value;
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.authService.login(email, password).subscribe({
+      next: (res) => {
+        this.loading = false;
+
+        // Guardamos token y datos de usuario
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('user', JSON.stringify(res.user));
+        localStorage.setItem('rol', res.user.rol.nombre);
+
+        // Redirigimos según el rol
+        const rol = res.user.rol.nombre.toLowerCase();
+
+        if (rol === 'admin') {
+          this.router.navigate(['/admin/dashboard']);
+        } else {
+          this.router.navigate(['/alumno/solicitud-equipo']);
+        }
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = 'Credenciales incorrectas o servidor no disponible.';
       }
-    }
+    });
   }
 }

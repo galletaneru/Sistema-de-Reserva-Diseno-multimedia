@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RecuperarComponent } from './components/auth/recuperar/recuperar.component';
 // import { CambiarContraseñaComponent } from './components/auth/cambiar-contraseña/cambiar-contraseña.component';
@@ -23,6 +23,7 @@ import { NotificacionesComponent } from './components/admin/notificaciones/notif
     LoginComponent,
     RecuperarComponent,
     // CambiarContraseñaComponent,
+    ResetPasswordComponent,
     SolicitudEquipoComponent,
     DashboardAdminComponent,
     GestionEquiposComponent,

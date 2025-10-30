@@ -9,11 +9,13 @@ import { GestionEquiposComponent } from './components/admin/gestion-equipos/gest
 import { GestionPacksComponent } from './components/admin/gestion-packs/gestion-packs.component';
 import { GestionSancionesComponent } from './components/admin/gestion-sanciones/gestion-sanciones.component';
 import { NotificacionesComponent } from './components/admin/notificaciones/notificaciones.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'auth/login' },
   { path: 'auth/login', component: LoginComponent },
   { path: 'auth/recuperar', component: RecuperarComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   // { path: 'auth/cambiar-contraseña', component: CambiarContraseñaComponent },
   { path: 'alumno/solicitud-equipo', component: SolicitudEquipoComponent },
   { path: 'admin/dashboard', component: DashboardAdminComponent },
