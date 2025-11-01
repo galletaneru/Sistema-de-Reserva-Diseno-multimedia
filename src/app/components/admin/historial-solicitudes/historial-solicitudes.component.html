@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="card">
+    <div class="header-content">
+      <div class="title-section">
+        <h1 class="h1">Historial de Solicitudes</h1>
+        <p class="small">Filtra por equipo, asignatura, fecha o estado</p>
+      </div>
+    </div>
+
+    <form [formGroup]="filtros" class="filters-bar">
+      <div class="filters-inner">
+        <div class="filter-item grow">
+          <input class="filter-input" type="text" placeholder="Buscar por equipo, asignatura o estudiante..."
+                 formControlName="search" list="historial-suggest">
+          <datalist id="historial-suggest">
+            <option *ngFor="let e of equipoOptions" [value]="e"></option>
+            <option *ngFor="let a of asignaturaOptions" [value]="a"></option>
+          </datalist>
+        </div>
+        <div class="filter-item">
+          <input class="filter-input" type="date" formControlName="fecha">
+        </div>
+        <div class="filter-item">
+          <select class="filter-input" formControlName="estado">
+            <option value="">Todos</option>
+            <option *ngFor="let est of estados" [value]="est">{{est}}</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <button type="button" class="btn btn-secondary" (click)="filtros.reset({search: '', fecha: '', estado: ''})">Limpiar</button>
+        </div>
+      </div>
+    </form>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Estudiante</th>
+          <th>Asignatura</th>
+          <th>Equipo</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of resultados">
+          <td>
+            <div class="usuario-info">
+              <span class="usuario-nombre">{{s.estudiante}}</span>
+              <span class="usuario-email small">{{s.email}}</span>
+            </div>
+          </td>
+          <td>{{s.asignatura}}</td>
+          <td>{{s.equipo}}</td>
+          <td><span class="fecha-badge">{{s.fecha | date:'dd/MM/yyyy'}}</span></td>
+          <td>
+            <span class="estado-badge" [class.activa]="s.estado==='APROBADA'" [class.finalizada]="s.estado==='RECHAZADA'">{{s.estado}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

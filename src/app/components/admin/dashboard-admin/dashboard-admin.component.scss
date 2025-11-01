@@ -1,0 +1,57 @@
+
+body, html, .app-container {
+  background: var(--bg-elev);
+}
+.admin-dashboard, .card {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 2.5px solid var(--border);
+  box-shadow: 0 12px 48px 0 rgba(68, 107, 169, 0.12);
+  padding: 48px 48px 24px 48px;
+  margin: 48px auto;
+}
+h1, .h1 {
+  color: var(--primary) !important;
+  font-weight: 900;
+  margin-bottom: 12px;
+  letter-spacing: 0.03em;
+}
+.section-title {
+  color: var(--primary);
+  letter-spacing: 0.01em;
+  font-weight: bold;
+}
+.stat-info h3 {
+  color: var(--muted); /* azul medio */
+  font-size: 2.7rem;
+}
+.stat-info p {
+  color: var(--text);
+  font-size: 1.03rem;
+  opacity: 0.72;
+}
+/* Más espacio visual superior en desktop */
+@media (max-width: 1024px) {
+  .admin-dashboard, .card {
+    padding: 20px 8px 10px 8px;
+    margin: 16px auto;
+  }
+}
+
+input, select, textarea {
+  background: #fff;
+  border: 1.2px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+}
+table {
+  background: #fff;
+  border-radius: var(--radius);
+}
+thead th {
+  background: var(--muted);
+  color: #fff;
+}
+tbody tr:hover {
+  background: var(--bg-elev);
+}

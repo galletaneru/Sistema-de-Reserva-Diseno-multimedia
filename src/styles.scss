@@ -10,67 +10,22 @@ html, body {
   padding: 0;
   overflow-x: hidden;
   width: 100%;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Variables CSS para el tema del departamento de diseño y multimedia */
 :root {
-  /* Paleta Rosa Palo Mejorada */
-  --primary: #8f6277;           /* Rosa palo oscuro - Principal */
-  --primary-dark: #6d4c5c;      /* Rosa palo más oscuro - Hover */
-  --primary-light: #a67b8a;     /* Rosa palo medio oscuro - Activo */
-  --secondary: #c594aa;         /* Rosa palo medio - Secundario */
-  --accent: #fdcae1;            /* Rosa palo claro - Acento */
-  --accent-light: #ffe5f0;      /* Rosa palo muy claro - Fondo suave */
-  
-  /* Colores de estado */
-  --success: #059669;           /* Verde esmeralda */
-  --success-bg: #ecfdf5;        /* Verde muy claro */
-  --success-border: #a7f3d0;    /* Verde claro */
-  --success-rgb: 5, 150, 105;
-  
-  --warning: #d97706;           /* Ámbar */
-  --warning-bg: #fffbeb;        /* Ámbar muy claro */
-  --warning-border: #fed7aa;    /* Ámbar claro */
-  
-  --error: #dc2626;             /* Rojo */
-  --error-bg: #fef2f2;          /* Rojo muy claro */
-  --error-border: #fecaca;      /* Rojo claro */
-  --error-rgb: 220, 38, 38;
-  
-  --info: #8f6277;              /* Rosa palo para info */
-  --info-bg: #fdf2f8;           /* Rosa muy claro */
-  --info-border: #f9a8d4;       /* Rosa claro */
-  
-  /* Fondos */
-  --bg-primary: #ffffff;        /* Blanco puro */
-  --bg-secondary: #fdf2f8;      /* Rosa muy claro */
-  --bg-tertiary: #fce7f3;       /* Rosa claro */
-  --bg-card: #ffffff;           /* Blanco puro */
-  --bg-glass: rgba(255, 255, 255, 0.95); /* Vidrio */
-  
-  /* Texto */
-  --text-primary: #581c87;      /* Púrpura oscuro para contraste */
-  --text-secondary: #8f6277;    /* Rosa palo oscuro */
-  --text-muted: #a67b8a;        /* Rosa palo medio */
-  --text-light: #c594aa;        /* Rosa palo claro */
-  
-  /* Bordes */
-  --border-light: #f3e8ff;      /* Púrpura muy claro */
-  --border-medium: #e9d5ff;     /* Púrpura claro */
-  --border-dark: #c594aa;       /* Rosa palo medio */
-  
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  
-  --font-family: 'Times New Roman', Times, serif;
+  --bg: #ffffff;                /* fondo general */
+  --bg-elev: #dbe8fa;           /* navbar y secciones elevadas */
+  --surface: #ffffff;           /* tarjetas/formularios */
+  --muted: #446BA9;             /* textos secundarios (azul medio) */
+  --text: #4a4a4a;              /* texto principal */
+  --primary: #F5A474;           /* color principal (naranja pastel) */
+  --primary-600: #CE9342;       /* hover o variante más intensa */
+  --ring: rgba(68, 107, 169, 0.3); /* anillos/sombras */
+  --border: #91B5E8;            /* bordes sutiles azul claro */
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --radius: 14px;
 }
 
 /* Reset y estilos base */
@@ -82,9 +37,9 @@ html, body {
 
 html, body {
   height: 100%;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 25%, #fce7f3 50%, #f3e8ff 75%, #ede9fe 100%);
-  color: var(--text-primary);
+  color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,7 +47,7 @@ html, body {
 
 /* Aplicar Times New Roman a todos los elementos */
 *, *::before, *::after {
-  font-family: 'Times New Roman', Times, serif !important;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* Layout principal */
@@ -109,12 +64,12 @@ html, body {
 
 /* Tarjetas con efecto glassmorphism */
 .card {
-  background: var(--bg-glass);
+  background: var(--surface);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius);
   padding: 2.5rem;
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -151,19 +106,19 @@ html, body {
   font-size: 1.875rem;
   font-weight: 600;
   margin: 0 0 1rem;
-  color: var(--text-primary);
+  color: var(--text);
 }
 
 /* Formularios */
 .input {
   width: 100%;
   padding: 1rem 1.25rem;
-  border: 2px solid var(--border-light);
-  border-radius: var(--radius-lg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
   font-size: 1rem;
   font-family: inherit;
-  background: var(--bg-card);
-  color: var(--text-primary);
+  background: var(--surface);
+  color: var(--text);
   transition: all 0.3s ease;
   position: relative;
 }
@@ -176,14 +131,14 @@ html, body {
 }
 
 .input::placeholder {
-  color: var(--text-muted);
+  color: var(--muted);
 }
 
 /* Botones */
 .btn {
   padding: 1rem 2rem;
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   font-size: 1rem;
   font-weight: 600;
   font-family: inherit;
@@ -196,14 +151,14 @@ html, body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #8f6277 0%, #6d4c5c 100%);
-  color: white;
+  background: var(--primary);
+  color: #fff;
   box-shadow: 0 4px 14px rgba(143, 98, 119, 0.3);
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow);
 }
 
 .btn-primary:active {
@@ -259,15 +214,15 @@ html, body {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
 }
 
 .table th {
-  background: linear-gradient(135deg, #8f6277 0%, #7a4f63 100%);
-  color: white;
+  background: var(--muted);
+  color: #fff;
   padding: 1rem;
   text-align: left;
   font-weight: 600;
@@ -278,12 +233,12 @@ html, body {
 
 .table td {
   padding: 1rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
   transition: background-color 0.3s ease;
 }
 
 .table tbody tr:hover {
-  background: var(--bg-secondary);
+  background: #f8f9fb !important;
 }
 
 .table tbody tr:last-child td {
@@ -294,8 +249,8 @@ html, body {
 .qty {
   width: 100px;
   padding: 0.75rem;
-  border: 2px solid var(--border-light);
-  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
   text-align: center;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -316,7 +271,7 @@ html, body {
 
 /* Texto pequeño */
 .small {
-  color: var(--text-muted);
+  color: var(--muted);
   font-size: 0.875rem;
   text-align: center;
   margin-top: 1rem;
@@ -328,7 +283,7 @@ html, body {
   border: 1px solid #a7f3d0;
   color: #065f46;
   padding: 1rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   margin: 1rem 0;
   display: flex;
   align-items: center;
@@ -341,7 +296,7 @@ html, body {
   border: 1px solid #fecaca;
   color: #991b1b;
   padding: 1rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   margin: 1rem 0;
   display: flex;
   align-items: center;
@@ -354,7 +309,7 @@ html, body {
   border: 1px solid #f9a8d4;
   color: #8f6277;
   padding: 1rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   margin: 1rem 0;
   display: flex;
   align-items: center;
@@ -394,7 +349,7 @@ html, body {
   gap: 0.75rem;
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--text-primary);
+  color: var(--text);
 }
 
 .brand-icon {
@@ -419,9 +374,9 @@ html, body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   text-decoration: none;
-  color: var(--text-secondary);
+  color: var(--muted);
   font-weight: 500;
   transition: all 0.3s ease;
   position: relative;
@@ -438,7 +393,7 @@ html, body {
   background: linear-gradient(135deg, #8f6277 0%, #7a4f63 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
 }
 
 .nav-link:hover::before,
@@ -450,7 +405,7 @@ html, body {
 .nav-link.active {
   color: white;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
 }
 
 .nav-icon {
@@ -481,8 +436,8 @@ nav {
   gap: 1rem;
   margin: 1rem 0;
   padding: 1rem;
-  background: var(--bg-glass);
-  border-radius: var(--radius-lg);
+  background: var(--bg-elev);
+  border-radius: var(--radius);
   backdrop-filter: blur(10px);
 }
 
@@ -543,7 +498,7 @@ nav {
 /* Efectos especiales para inputs */
 .input {
   background: rgba(255, 255, 255, 0.9);
-  border: 2px solid var(--border-light);
+  border: 2px solid var(--border);
   transition: all 0.3s ease;
 }
 
@@ -567,9 +522,101 @@ nav {
 
 /* Botón secundario para cerrar sesión */
 .btn-secondary {
-  background: linear-gradient(135deg, #c594aa 0%, #a67b8a 100%);
-  color: white;
+  background: var(--muted);
+  color: #fff;
   box-shadow: 0 4px 14px rgba(197, 148, 170, 0.3);
+}
+
+/* Botón éxito y peligro con misma línea visual que alumno */
+.btn-success {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(var(--success-rgb), 0.25);
+}
+
+.btn-success:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(var(--success-rgb), 0.35);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(var(--error-rgb), 0.25);
+}
+
+.btn-danger:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(var(--error-rgb), 0.35);
+}
+
+/* Alias para botones de acciones en admin */
+.btn-edit {
+  @extend .btn-success;
+}
+
+.btn-delete {
+  @extend .btn-danger;
+}
+
+/* Unificar inputs de admin con el estilo global de alumno */
+.form-input,
+select.form-input,
+textarea.form-input,
+input.form-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--surface);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+select.form-input:focus,
+textarea.form-input:focus,
+input.form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(143, 98, 119, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Badges coherentes */
+.codigo-badge,
+.fecha-badge,
+.categoria-badge {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.estado-badge.disponible,
+.estado-badge.activa {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.estado-badge.reservado,
+.estado-badge.finalizada {
+  background: #fffbeb;
+  color: #92400e;
+  border-color: #fed7aa;
+}
+
+.estado-badge.mantenimiento {
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
 }
 
 .btn-secondary:hover:not(:disabled) {
@@ -618,12 +665,12 @@ nav {
 .admin-footer {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--border-light);
+  border-top: 1px solid var(--border);
   text-align: center;
 }
 
 .footer-text {
-  color: var(--text-muted);
+  color: var(--muted);
   font-size: 0.9rem;
   margin: 0;
 }
@@ -632,9 +679,9 @@ nav {
 .notificaciones-section {
   margin: 0 0 2rem 0;
   padding: 1.5rem;
-  background: var(--bg-card);
+  background: var(--surface);
   border-radius: 12px;
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--border);
   box-shadow: 0 4px 20px rgba(143, 98, 119, 0.1);
 }
 
@@ -644,7 +691,7 @@ nav {
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
 }
 
 .notificaciones-footer {
@@ -653,7 +700,7 @@ nav {
   align-items: center;
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--border-light);
+  border-top: 1px solid var(--border);
 }
 
 .section-title {
@@ -663,7 +710,7 @@ nav {
   margin: 0;
   font-size: 1.3rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text);
   flex: 1;
 }
 
@@ -687,7 +734,7 @@ nav {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: var(--bg-secondary);
+  background: var(--bg-elev);
   border-radius: 8px;
   border-left: 4px solid transparent;
   transition: all 0.3s ease;
@@ -715,19 +762,19 @@ nav {
 .notificacion-titulo {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text);
   margin: 0 0 0.25rem 0;
 }
 
 .notificacion-descripcion {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--muted);
   margin: 0 0 0.25rem 0;
 }
 
 .notificacion-tiempo {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--muted);
 }
 
 .notificacion-acciones {
@@ -867,16 +914,17 @@ nav {
 
 /* Navbar Admin */
 .admin-navbar {
-  background: var(--primary);
+  background: linear-gradient(180deg, #fde5ef, #fff);
+  color: #8f6277;
   padding: 1rem 0;
-  box-shadow: 0 2px 10px rgba(143, 98, 119, 0.15);
-  position: fixed;
+  border-bottom: 1px solid rgba(197, 148, 170, 0.2);
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.08);
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
-  width: 100vw;
+  width: 100%;
   margin: 0;
-  border: none;
   border-radius: 0;
   z-index: 100;
 }
@@ -894,7 +942,7 @@ nav {
 
 .navbar-brand {
   .navbar-title {
-    color: white;
+    color: #8f6277;
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
@@ -920,19 +968,56 @@ nav {
   }
 }
 
+/* Unificar botones del navbar de admin con estilo del navbar de alumno */
+.admin-navbar .navbar-btn:not(.btn),
+.admin-navbar .btn.navbar-btn {
+  display: inline-block;
+  background: var(--muted);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: none;
+  transition: all 0.18s ease;
+  cursor: pointer;
+}
+
+.admin-navbar .navbar-btn:not(.btn):hover,
+.admin-navbar .btn.navbar-btn:hover {
+  color: #fff;
+  background: var(--primary);
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.admin-navbar .navbar-btn.active,
+.admin-navbar .btn.navbar-btn.active,
+.admin-navbar a.navbar-btn.active {
+  background: var(--muted);
+  color: #fff;
+}
+
+/* Quitar cualquier subrayado/borde inferior del botón Historial */
+.admin-navbar .navbar-btn {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
 /* Estilos para el footer */
 .footer-text {
   margin-top: 2rem;
   padding: 1rem 0;
   text-align: center;
-  border-top: 1px solid var(--border-light);
-  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  background: var(--bg-elev);
   border-radius: 0 0 12px 12px;
   
   p {
     margin: 0;
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--muted);
     font-weight: 500;
   }
 }
@@ -1087,7 +1172,7 @@ nav {
 }
 
 .modal-content {
-  background: var(--bg-card);
+  background: var(--surface);
   border-radius: 12px;
   width: 90%;
   max-width: 500px;
@@ -1105,13 +1190,13 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
 }
 
 .modal-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text);
   margin: 0;
 }
 
@@ -1119,7 +1204,7 @@ nav {
   background: none;
   border: none;
   font-size: 1.8rem;
-  color: var(--text-muted);
+  color: var(--muted);
   cursor: pointer;
   transition: color 0.3s ease;
   
@@ -1137,7 +1222,7 @@ nav {
   justify-content: flex-end;
   gap: 0.75rem;
   padding: 1.5rem;
-  border-top: 1px solid var(--border-light);
+  border-top: 1px solid var(--border);
 }
 
 /* Estilos específicos para el modal de detalle */
@@ -1150,7 +1235,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
   
   &:last-child {
     border-bottom: none;
@@ -1159,12 +1244,12 @@ nav {
 
 .info-label {
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text);
   min-width: 120px;
 }
 
 .info-value {
-  color: var(--text-secondary);
+  color: var(--muted);
   text-align: right;
   flex: 1;
 }
@@ -1176,7 +1261,7 @@ nav {
 .equipos-titulo {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text);
   margin: 0 0 0.75rem 0;
 }
 
@@ -1184,15 +1269,15 @@ nav {
   list-style: none;
   padding: 0;
   margin: 0;
-  background: var(--bg-secondary);
+  background: var(--bg-elev);
   border-radius: 8px;
   padding: 1rem;
 }
 
 .equipo-item-detalle {
   padding: 0.5rem 0;
-  color: var(--text-secondary);
-  border-bottom: 1px solid var(--border-light);
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
   
   &:last-child {
     border-bottom: none;
@@ -1228,17 +1313,17 @@ nav {
   display: block;
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--muted);
   margin-bottom: 0.5rem;
 }
 
 .form-textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid var(--border-medium);
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+  background: var(--bg-elev);
+  color: var(--text);
   font-size: 1rem;
   resize: vertical;
   min-height: 100px;
@@ -1271,4 +1356,139 @@ nav {
       font-size: 0.8rem;
     }
   }
+}
+
+/* ---- UTA SOFT: ESTILOS PRINCIPALES ---- */
+
+body, html {
+  background: linear-gradient(135deg, var(--bg-elev) 0%, var(--bg) 100%);
+  color: var(--text);
+}
+
+/* Botones */
+.btn, .btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.85rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: none;
+  text-transform: none;
+  transition: background 0.18s;
+}
+.btn:hover, .btn-primary:hover, .btn:focus {
+  background: var(--primary-600);
+  color: #fff;
+}
+.btn-secondary {
+  background: var(--muted);
+  color: #fff;
+}
+.btn-secondary:hover, .btn-secondary:focus {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-danger {
+  background: linear-gradient(90deg, #fa5858 0%, #b83535 100%);
+  color: white;
+}
+.btn-success {
+  background: linear-gradient(90deg, #5bc980 0%, #42a36f 100%);
+  color: white;
+}
+
+/* Navbar principal y admin */
+.main-nav, .admin-navbar {
+  background: var(--bg-elev) !important;
+  color: var(--muted);
+  border-bottom: 2px solid var(--border);
+}
+.navbar-btn {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  font-weight: 700;
+  transition: background 0.18s, color 0.18s;
+}
+.navbar-btn.active, .navbar-btn:hover {
+  background: var(--primary) !important;
+  color: #fff !important;
+}
+
+/* Tarjetas */
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Inputs */
+.input, .form-input {
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius);
+}
+.input:focus, .form-input:focus {
+  border-color: var(--muted);
+}
+
+/* Tablas */
+.table th,
+.table tr th {
+  background: var(--muted);
+  color: #fff;
+}
+.table td {
+  color: var(--text);
+}
+.table tbody tr:hover {
+  background: #f8f9fb !important;
+}
+
+/* Chips & badges */
+.codigo-badge, .fecha-badge, .categoria-badge {
+  background: var(--bg-elev);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  font-weight: 600;
+}
+.estado-badge.activa {
+  background: var(--primary);
+  color: #fff;
+}
+.estado-badge.finalizada {
+  background: #ededed;
+  color: var(--muted);
+}
+
+body, html {
+  background: var(--bg-elev);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, .h1, .section-title {
+  color: var(--primary) !important; /* Amarillo UTA */
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.3em;
+}
+h2, .h2, h3, .h3 {
+  color: var(--muted) !important; /* Azul institucional más brillante */
+}
+.hr-accent, .subrayado-uta {
+  width: 44px;
+  height: 0;
+  border: none;
+  border-bottom: 3px solid #EFB611 !important;
+  margin: 8px 0 22px 2px;
+  display: block;
+  border-radius: 3px;
 }

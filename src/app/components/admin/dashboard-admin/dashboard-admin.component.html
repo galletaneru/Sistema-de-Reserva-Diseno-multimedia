@@ -5,13 +5,14 @@
       <h1 class="navbar-title">Diseño Multimedia</h1>
     </div>
     <div class="navbar-actions">
-      <button class="btn btn-primary navbar-btn" (click)="mostrarGestionar()">
+      <button class="btn navbar-btn" (click)="mostrarGestionar()" [ngClass]="{active: seccionActiva === 'gestionar'}">
         Gestionar
       </button>
-      <button class="btn btn-secondary navbar-btn" (click)="mostrarSolicitudes()">
+      <button type="button" class="btn navbar-btn" (click)="mostrarSolicitudes()" [ngClass]="{active: seccionActiva === 'solicitudes'}">
         Ver Solicitudes
       </button>
-      <button class="btn btn-danger navbar-btn" (click)="cerrarSesion()">
+      <button type="button" class="btn navbar-btn" [routerLink]="['/admin/solicitudes-historial']" routerLinkActive="active">Historial</button>
+      <button type="button" class="btn navbar-btn" (click)="cerrarSesion()">
         Cerrar Sesión
       </button>
     </div>
@@ -108,13 +109,7 @@
             </div>
           </div>
           
-          <div class="notificacion-item procesada" (click)="abrirDetalleSolicitud(solicitudes[2])">
-            <div class="notificacion-content">
-              <h4 class="notificacion-titulo">Solicitud Aprobada</h4>
-              <p class="notificacion-descripcion">Ana Martínez - Tablet iPad Pro aprobada</p>
-              <span class="notificacion-tiempo">Ayer</span>
-            </div>
-          </div>
+          <!-- Solo pendientes en esta vista -->
         </div>
         
         <div class="notificaciones-footer">
