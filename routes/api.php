@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Prestamo\PrestamoController;
+use App\Http\Controllers\Prestamo\PrestamoAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,15 @@ Route::middleware('auth:sanctum')->group(function () {
     // Prestamos
     Route::post('/prestamos', [PrestamoController::class, 'store']);
     // Route::post('/prestamos/solicitar', [PrestamoController::class, 'solicitarPrestamo']);
+    
 });
-//Route::middleware('auth:sanctum')->post('/prestamos', [PrestamoController::class, 'store']);
-    //Route::middleware('auth:sanctum')->post('/prestamos/solicitar', [PrestamoController::class, 'solicitarPrestamo']);
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::post('/prestamos/cambiar-estado', [PrestamoAdminController::class, 'cambiarEstado']);
+});
+//Funciona
+/*
+Route::middleware(['auth:sanctum'])->group(function () {
+    // Ruta para que el ADMIN apruebe o rechace solicitudes
+    Route::patch('/admin/prestamos/actualizar-estado', [PrestamoAdminController::class, 'updateEstado']);
+});
+*/

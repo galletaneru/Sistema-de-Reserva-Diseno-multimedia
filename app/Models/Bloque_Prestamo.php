@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BloquePrestamo extends Model
 {
-    protected $table = 'bloque_prestamo';
+    protected $table = 'bloqueprestamos';
     protected $primaryKey = 'idBloquePrestamo';
     public $timestamps = false;
 

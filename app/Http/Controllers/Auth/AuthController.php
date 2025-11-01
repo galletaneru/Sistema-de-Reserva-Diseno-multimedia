@@ -44,10 +44,11 @@ class AuthController extends Controller
     
         // 3. Crear la Entidad User 
         $user = User::create([
-            'idPersona' => $persona->IdPersona, 
+            'idPersona' => $persona->idPersona, 
             // Contrasena debe coincidir con la 'C' mayúscula de tu tabla
             'Contrasena' => Hash::make($request->password), 
-            'estadoSancion' => 'ACTIVO', 
+            'estadoSancion' => 'ACTIVO',
+             'Email' => $request->email, 
         ]);
     
         // 4. Asignar Rol Predeterminado 
@@ -132,7 +133,8 @@ class AuthController extends Controller
         ->first();
 
         // 3️⃣ Validar credenciales
-        if (!$user || !Auth::attempt(['idPersona' => $user->idPersona, 'password' => $request->password])) {
+        //if (!$user || !Auth::attempt(['idPersona' => $user->idPersona, 'password' => $request->password])) {
+        if (!$user || !Hash::check($request->password, $user->Contrasena)) {
             return response()->json(['message' => 'Credenciales inválidas'], 401);
         }
 
@@ -151,7 +153,7 @@ class AuthController extends Controller
                 'email' => $user->persona->Email ?? '',
                 'rol' => [
                     'nombre' => $rol->Nombre ?? null,
-                    'descripcion' => $rol->Descricion ?? null,
+                    'descripcion' => $rol->Descripcion ?? null,
                 ],
             ],
         ], 200);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\BloquePrestamo;
 
 class Prestamo extends Model
 {
@@ -19,7 +20,7 @@ class Prestamo extends Model
         'tipo'
     ];
 
-    // 🔹 Relaciones
+    //  Relaciones
 
     public function user()
     {
@@ -31,6 +32,21 @@ class Prestamo extends Model
         return $this->belongsTo(Equipo::class, 'idEquipo');
     }
 
+     /*public function bloques()
+    {
+        return $this->hasMany(BloquePrestamo::class, 'idPrestamo', 'idPrestamo');
+    }
+    */
+    public function bloques()
+    {
+        return $this->belongsToMany(
+            Bloque::class,
+            'bloqueprestamos',
+            'idPrestamo',
+            'idBloque'
+        );
+    }
+
     public function bloquePrestamo()
     {
         return $this->hasMany(BloquePrestamo::class, 'idPrestamo');
@@ -39,5 +55,7 @@ class Prestamo extends Model
     public function observacion()
     {
         return $this->hasMany(Observacion::class, 'idPrestamo');
+
     }
+    
 }

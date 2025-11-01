@@ -15,7 +15,9 @@ class PrestamoController extends Controller
             'idEquipo' => 'required|integer|exists:equipos,idEquipo',
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
-            'tipo' => 'required|string'
+            'tipo' => 'required|string',
+           // 'bloques' => 'required|array',
+            //'bloques.*' => 'exists:bloques,idBloque'
         ]);
 
         $prestamo = Prestamo::create([
@@ -26,6 +28,13 @@ class PrestamoController extends Controller
             'tipo' => $request->tipo,
             'estado' => 'pendiente',
         ]);
+                // Asociar bloques
+        $prestamo->bloques()->attach($request->bloques);
+
+        return response()->json([
+            'message' => 'Préstamo creado correctamente',
+            'prestamo' => $prestamo->load('bloques', 'equipo', 'user')
+        ], 201);
 
         return response()->json($prestamo, 201);
     }

@@ -81,6 +81,21 @@ class User extends Authenticatable implements CanResetPasswordContract
      *
      * @var array<string, string>
      */
+// Verifica si el usuario tiene un rol específico
+    public function hasRole($rolNombre)
+    {
+        return $this->roles()
+                    ->whereRaw('LOWER(nombre) = ?', [strtolower($rolNombre)])
+                    ->exists();
+    }
+
+    //Verifica si el usuario es ADMIN
+    public function isAdmin()
+    {
+        return $this->hasRole('ADMIN');
+    }
+
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
