@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReservasService } from '../solicitar-reserva/reservas.service';
 import { Equipo, Pack, TipoPrestamo } from '../../../shared/models';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-mis-solicitudes',
@@ -12,6 +13,7 @@ import { Equipo, Pack, TipoPrestamo } from '../../../shared/models';
 })
 export class MisSolicitudesComponent implements OnInit {
   private reservas = inject(ReservasService);
+  private api = inject(AuthService);
 
   solicitudes: any[] = [];
   equipos: Equipo[] = [];
@@ -26,21 +28,33 @@ export class MisSolicitudesComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.solicitudes = this.reservas.getSolicitudesRealizadas().map((s, index) => {
-      const bloqueTxt = this.bloques.find(b => b.id === s.bloque)?.texto ?? '—';
-      const packNombre = this.packs.find(p => p.idPack === s.idPack)?.nombre ?? '—';
-      const estado = ['PENDIENTE', 'APROBADA', 'RECHAZADA'][index % 3]; // Simulado
+    const token = localStorage.getItem('token') ?? '';
+    this.api.getSolicitudesUsuario(token).subscribe({
+      next: (data) => {
+        this.solicitudes = data.map((s, index) => {
+          const bloqueTxt =
+            s.bloque_prestamo?.length > 0
+              ? s.bloque_prestamo
+                  .map((bp: any) => bp.bloque?.nombre || `Bloque ${bp.idBloque}`)
+                  .join(', ')
+              : '—';
 
-      return {
-        ...s,
-        id: index + 1,
-        bloqueTxt,
-        packNombre,
-        estado
-      };
+          return {
+            id: s.idPrestamo,
+            tipo: s.tipo === 'DENTRO' ? 'Laboratorio' : 'Externo',
+            fecha_inicio: s.fecha_inicio ?? '—',
+            fecha_fin: s.fecha_fin ?? '—',
+            bloqueTxt,
+            equipos: [s.equipo?.nombre || '—'],
+            observacion: s.Observacion ?? '',
+            estado: s.estado?.toUpperCase() ?? 'PENDIENTE'
+          };
+        });
+      },
+      error: (err) => {
+        console.error('Error al cargar solicitudes:', err);
+      },
     });
-
-    this.equipos = this.reservas.getEquiposDisponibles();
-    this.packs = this.reservas.getPacksActivos();
   }
+
 }

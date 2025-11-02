@@ -59,6 +59,15 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl}/prestamos`, payload, { headers });
   }
+  getSolicitudesUsuario(token: string)
+  {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    };
+    return this.http.get<any[]>(`${this.apiUrl}/prestamos`, { headers });
+  }
+
   //muestra el usuario utenticado
   getUsuario(token: string) {
     const headers = {
