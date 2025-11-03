@@ -10,6 +10,8 @@ use App\Http\Controllers\BloqueController;
 use App\Http\Controllers\Prestamo\PrestamoController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\mostrar\usuario;
+use App\Http\Controllers\Prestamo\PrestamoAdminController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,17 +48,32 @@ Route::middleware('auth:sanctum')->group(function () {
     // Método: POST
     // URL: /api/logout
     Route::post('/logout', [AuthController::class, 'logout']); 
+
     //mostrar equipos
     Route::get('/equipos', [EquipoController::class, 'index']);
     Route::get('/userr', [usuario::class, 'index']);
     Route::get('/bloques', [BloqueController::class, 'index']);// muestra los bloques
     Route::get('/asignaturas', [AsignaturaController::class, 'index']);// mostramos las asignaturas
-    //dashboard de admin
-    // Prestamos
+
+
+
+
+    // Prestamoss
     Route::post('/prestamos', [PrestamoController::class, 'store']);
     // Route::post('/prestamos/solicitar', [PrestamoController::class, 'solicitarPrestamo']);
-   
-    //Route::get('/admin/dashboard', [AdminDashboardController::class, 'getDashboardData']);
+
+     //Route::get('/admin/dashboard', [AdminDashboardController::class, 'getDashboardData']);
 });
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::post('/prestamos/cambiar-estado', [PrestamoAdminController::class, 'cambiarEstado']);
+});
+
+Route::prefix('admin/prestamos')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    Route::get('/pendientes', [PrestamoAdminController::class, 'pendientes']);
+    Route::get('/historial', [PrestamoAdminController::class, 'historial']);
+    Route::post('/aprobar/{id}', [PrestamoAdminController::class, 'aprobar']);
+    Route::post('/rechazar/{id}', [PrestamoAdminController::class, 'rechazar']);
+});
+
 //Route::middleware('auth:sanctum')->post('/prestamos', [PrestamoController::class, 'store']);
     //Route::middleware('auth:sanctum')->post('/prestamos/solicitar', [PrestamoController::class, 'solicitarPrestamo']);
