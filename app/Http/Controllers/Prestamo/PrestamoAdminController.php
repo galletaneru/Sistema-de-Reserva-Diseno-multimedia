@@ -42,4 +42,18 @@ class PrestamoAdminController extends Controller
         'prestamo' => $prestamo
     ]);
 }
+public function verTodosLosPrestamos()
+{
+    $user = auth()->user();
+
+    // Verificar que sea admin
+    if (!$user->isAdmin()) {
+        return response()->json(['message' => 'No autorizado'], 403);
+    }
+
+    // Traer todos los préstamos con sus relaciones
+    $prestamos = Prestamo::with(['user', 'equipo', 'bloquePrestamo'])->get();
+
+    return response()->json($prestamos);
+}
 }

@@ -66,6 +66,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::post('/prestamos/cambiar-estado', [PrestamoAdminController::class, 'cambiarEstado']);
+    Route::get('/admin/prestamos', [PrestamoAdminController::class, 'verTodosLosPrestamos']);
 });
 
 Route::prefix('admin/prestamos')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
